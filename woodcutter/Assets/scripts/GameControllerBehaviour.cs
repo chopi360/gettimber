@@ -11,6 +11,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public List<GameObject> treeModules = new List<GameObject> ();
 	public SpriteRenderer playerSprite;
 	public Sprite[] playerSprites;
+	public Image	countDown;
 
 	public Transform playerPosLeft;
 	public Transform playerPosRight;
@@ -21,6 +22,11 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public GameObject startMenu;
 	public GameObject player;
 	public static GameControllerBehaviour instance;
+
+	private float timeToDeathConst;
+	public float timePerCut = 0.05f;
+	public float timeToDeath = 15.0f;
+	private float timePlayed;
 
 	private List<GameObject> usedTreeModules = new List<GameObject> ();
 
@@ -34,8 +40,21 @@ public class GameControllerBehaviour : MonoBehaviour {
 		}
 	}
 
+	void Update(){
+		if (playing) {
+			timeToDeath -= Time.deltaTime * 2.0f;
+			countDown.fillAmount = timeToDeath / timeToDeathConst;
+			if (timeToDeath <= 0) {
+				endMenu.SetActive (true);
+				playing = false;
+				endMenu.GetComponent<EndGameBehaviour> ().SetCuttedWood (woodCuttedInt);
+			}
+		}
+	}
+
 	void Init (){
 		instance = this;
+		timeToDeathConst = timeToDeath;
 		CreateTree ();
 	}
 
@@ -55,6 +74,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public void ResetGameplay(){
 		endMenu.SetActive (false);
 		playing = true;
+		timeToDeath = timeToDeathConst;
 		for (int i = 0; i < usedTreeModules.Count; i++) {
 			treeModules.Add(usedTreeModules[i]);
 			usedTreeModules[i].SetActive(false);
@@ -88,6 +108,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 					MoveWood (dir);
 					MoveAllDown ();
 					AnimatePlayer();
+					timeToDeath = timePerCut + timeToDeath > 15.0f? 15.0f : timePerCut + timeToDeath;
 			} else {
 					endMenu.SetActive (true);
 					playing = false;
