@@ -12,10 +12,14 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public SpriteRenderer playerSprite;
 	public Sprite[] playerSprites;
 
+	public Transform playerPosLeft;
+	public Transform playerPosRight;
+
 	private int woodCuttedInt = 0;
 	private bool playing = false;
 	public GameObject endMenu;
 	public GameObject startMenu;
+	public GameObject player;
 	public static GameControllerBehaviour instance;
 
 	private List<GameObject> usedTreeModules = new List<GameObject> ();
@@ -33,9 +37,6 @@ public class GameControllerBehaviour : MonoBehaviour {
 	void Init (){
 		instance = this;
 		CreateTree ();
-
-
-	
 	}
 
 	void CreateTree (){
@@ -71,12 +72,22 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public void TouchResponse(Vector3 dir){
 		if (playing) {
 			string touched = dir.x > 0 ? "l" : "r";
+
+			if(dir.x > 0){
+				player.transform.position = playerPosLeft.position;
+				player.transform.rotation = playerPosLeft.rotation;
+			}else{
+				player.transform.position = playerPosRight.position;
+				player.transform.rotation = playerPosRight.rotation;
+			}
+
 			bool isDead = GetDeadState (touched, dir);
 			if (!isDead) {
 					woodCuttedInt++;
 					woodCuttedText.text = woodCuttedInt.ToString ();
 					MoveWood (dir);
 					MoveAllDown ();
+					AnimatePlayer();
 			} else {
 					endMenu.SetActive (true);
 					playing = false;
@@ -103,11 +114,17 @@ public class GameControllerBehaviour : MonoBehaviour {
 	}
 
 	void MoveWood (Vector3 dir)	{
-		usedTreeModules [0].transform.localPosition = Vector3.zero;
-		treeModules.Add (usedTreeModules [0]);
-		usedTreeModules.Remove (usedTreeModules [0]);
-		treeModules [treeModules.Count - 1].SetActive (false);
+		usedTreeModules [0].GetComponent<Trunk> ().SetDir (dir);
+		usedTreeModules.Remove (usedTreeModules[0]);
+	}
 
+	public void RemoveFromUsed(GameObject treePart){
+	
+		treeModules.Add (treePart);
+		usedTreeModules.Remove (treePart);
+		treePart.transform.position = Vector3.zero;
+		treePart.transform.localPosition = Vector3.zero;
+		treePart.SetActive (false);
 	}
 
 	void MoveAllDown (){
@@ -129,5 +146,11 @@ public class GameControllerBehaviour : MonoBehaviour {
 		newPos.y = initPos.y + MAX_WOOD_SHOWN * woodHeight;
 		usedTreeModules[usedTreeModules.Count - 1].transform.localPosition = newPos;
 		usedTreeModules[usedTreeModules.Count - 1].SetActive(true);
+	}
+
+	void AnimatePlayer (){
+		playerSprite.sprite = playerSprites [1];
+		playerSprite.sprite = playerSprites [2];
+		playerSprite.sprite = playerSprites [0];
 	}
 }
