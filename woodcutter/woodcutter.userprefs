@@ -1,18 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scripts\GameControllerBehaviour.cs">
     <Files>
-      <File FileName="Assets\scripts\InputBehaviour.cs" Line="11" Column="1" />
-      <File FileName="Assets\scripts\GameControllerBehaviour.cs" Line="7" Column="25" />
-      <File FileName="Assets\scripts\TrunkLeft.cs" Line="4" Column="29" />
-      <File FileName="Assets\scripts\Trunk.cs" Line="17" Column="76" />
-      <File FileName="Assets\scripts\TrunkRight.cs" Line="7" Column="1" />
+      <File FileName="Assets\scripts\GameControllerBehaviour.cs" Line="49" Column="17" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\Julia\Documents\woodcutter\Assets\scripts\GameControllerBehaviour.cs" line="62" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

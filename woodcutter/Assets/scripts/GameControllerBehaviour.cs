@@ -1,16 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameControllerBehaviour : MonoBehaviour {
 
+	public Text woodCuttedText;
 	public Vector3 initPos;
 	public const int MAX_WOOD_SHOWN = 6;
 	public List<GameObject> treeModules = new List<GameObject> ();
-	private List<GameObject> usedTreeModules = new List<GameObject> ();
-	public static GameControllerBehaviour instance;
 	public SpriteRenderer playerSprite;
 	public Sprite[] playerSprites;
+
+	private int woodCuttedInt = 0;
+	private bool playing = false;
+	public GameObject endMenu;
+	public GameObject startMenu;
+	public static GameControllerBehaviour instance;
+
+	private List<GameObject> usedTreeModules = new List<GameObject> ();
+
+
 	// Use this for initialization
 	void Awake () {
 		if (GameControllerBehaviour.instance == null) {
@@ -22,8 +32,15 @@ public class GameControllerBehaviour : MonoBehaviour {
 
 	void Init (){
 		instance = this;
+		CreateTree ();
+
+
+	
+	}
+
+	void CreateTree (){
 		for (int i = 0; i < MAX_WOOD_SHOWN; i++) {
-			int elementIndex = i == 0? 0 : Random.Range(0, treeModules.Count);
+			int elementIndex = i == 0? 0 : Random.Range(1, treeModules.Count);
 			usedTreeModules.Add(treeModules[elementIndex]);
 			treeModules.Remove(usedTreeModules[usedTreeModules.Count - 1]);
 			float woodHeight = usedTreeModules[usedTreeModules.Count - 1].GetComponent<Trunk>().GetHeight();
@@ -32,19 +49,43 @@ public class GameControllerBehaviour : MonoBehaviour {
 			usedTreeModules[usedTreeModules.Count - 1].transform.localPosition = newPos;
 			usedTreeModules[usedTreeModules.Count - 1].SetActive(true);
 		}
-	
+	}
+
+	public void ResetGameplay(){
+		endMenu.SetActive (false);
+		playing = true;
+		for (int i = 0; i < usedTreeModules.Count; i++) {
+			treeModules.Add(usedTreeModules[i]);
+			usedTreeModules[i].SetActive(false);
+		}
+		usedTreeModules.Clear ();
+		CreateTree ();
+		woodCuttedInt = 0;
+	}
+
+	public void StartGame(){
+		startMenu.SetActive (false);
+		ResetGameplay();
 	}
 	
 	public void TouchResponse(Vector3 dir){
+		if (playing) {
+			string touched = dir.x > 0 ? "l" : "r";
+			bool isDead = GetDeadState (touched, dir);
+			if (!isDead) {
+					woodCuttedInt++;
+					woodCuttedText.text = woodCuttedInt.ToString ();
+					MoveWood (dir);
+					MoveAllDown ();
+			} else {
+					endMenu.SetActive (true);
+					playing = false;
+					endMenu.GetComponent<EndGameBehaviour> ().SetCuttedWood (woodCuttedInt);
 
-		string touched = dir.x > 0 ? "l" : "r";
-		bool isDead = GetDeadState (touched, dir);
-		if (!isDead) {
-			MoveWood (dir);
-			MoveAllDown ();
+			}
 		}
 	}
-
+	//Returns true if the click will kill the player.
 	bool GetDeadState (string touched, Vector3 dir)	{
 		bool toRet = false;
 
@@ -57,7 +98,6 @@ public class GameControllerBehaviour : MonoBehaviour {
 		if (right!= null) {
 			toRet = touched == "r";
 		}
-
 
 		return toRet;
 	}
@@ -81,7 +121,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 	}
 
 	void LoadRandWood (){
-		int elementIndex = Random.Range(0, treeModules.Count);
+		int elementIndex = Random.Range(1, treeModules.Count);
 		usedTreeModules.Add(treeModules[elementIndex]);
 		treeModules.Remove(usedTreeModules[usedTreeModules.Count - 1]);
 		float woodHeight = usedTreeModules[usedTreeModules.Count - 1].GetComponent<Trunk>().GetHeight();
