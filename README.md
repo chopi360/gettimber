@@ -9,6 +9,6 @@ Using Unity3D and c#.
 
 TODO
 * Count down
-* Animations
+* Animations player
 * A nice font
 * 
