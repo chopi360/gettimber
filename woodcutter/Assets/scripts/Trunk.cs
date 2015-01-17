@@ -13,6 +13,7 @@ public class Trunk : MonoBehaviour {
 	void Update () {
 		if (move) {
 			transform.position += moveTo * Time.deltaTime * 3.0f;
+			transform.Rotate( new Vector3(0.0f, 0.0f, 10.0f));
 			if (moveToR && transform.position.x >= target.x) {
 				StopAnim ();
 			}
@@ -35,8 +36,8 @@ public class Trunk : MonoBehaviour {
 		return gameObject.GetComponent<SpriteRenderer> ().renderer.bounds.size.y;
 	}
 
-	void StopAnim ()
-	{
+	void StopAnim (){
+		transform.rotation = Quaternion.Euler( new Vector3(0.0f, 0.0f, 0.0f));
 		GameControllerBehaviour.instance.RemoveFromUsed (gameObject);
 		move = false;
 	}
