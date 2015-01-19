@@ -15,7 +15,8 @@ public class EndGameBehaviour : MonoBehaviour {
 			PlayerPrefs.SetInt("record", number);
 			newRecord.SetActive(true);
 		}
-
+		GooglePlayController.instance.SaveResult(number);
+		GooglePlayController.instance.ShowLeaderBoard();
 	}
 
 	void OnDisable(){
