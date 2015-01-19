@@ -5,6 +5,7 @@ Using Unity3D and c#.
 
 TODO
 
-* Animations player
+* Animations player - cut and death.
+* Save record
 * A nice font
 * Layout gameplay and menus.
