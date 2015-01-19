@@ -12,7 +12,6 @@ public class EndGameBehaviour : MonoBehaviour {
 
 		cuttedWood.text = "#" + number.ToString ();
 		if(!PlayerPrefs.HasKey("record") || PlayerPrefs.GetInt("record") <= number){
-			Debug.Log("NUEVO RECORD!! : " + number);
 			PlayerPrefs.SetInt("record", number);
 			newRecord.SetActive(true);
 		}
