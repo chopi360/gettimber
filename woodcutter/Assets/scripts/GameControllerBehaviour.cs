@@ -103,6 +103,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 
 			bool isDead = GetDeadState (touched, dir);
 			if (!isDead) {
+					player.GetComponent<AudioSource>().Play();
 					woodCuttedInt++;
 					woodCuttedText.text = woodCuttedInt.ToString ();
 					MoveWood (dir);
