@@ -5,18 +5,21 @@ using UnityEngine.UI;
 public class EndGameBehaviour : MonoBehaviour {
 
 	public Text cuttedWood;
-	// Use this for initialization
-	void Start () {
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+	public GameObject newRecord;
 
 	public void SetCuttedWood(int number){
+
 		cuttedWood.text = "#" + number.ToString ();
+		if(!PlayerPrefs.HasKey("record") || PlayerPrefs.GetInt("record") <= number){
+			Debug.Log("NUEVO RECORD!! : " + number);
+			PlayerPrefs.SetInt("record", number);
+			newRecord.SetActive(true);
+		}
+
+	}
+
+	void OnDisable(){
+		newRecord.SetActive(false);
 	}
 }
