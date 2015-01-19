@@ -10,7 +10,7 @@ public class EndGameBehaviour : MonoBehaviour {
 
 	public void SetCuttedWood(int number){
 
-		cuttedWood.text = "#" + number.ToString ();
+		cuttedWood.text = number.ToString ();
 		if(!PlayerPrefs.HasKey("record") || PlayerPrefs.GetInt("record") <= number){
 			PlayerPrefs.SetInt("record", number);
 			newRecord.SetActive(true);
