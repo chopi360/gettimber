@@ -113,6 +113,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 		usedTreeModules.Clear ();
 		CreateTree ();
 		woodCuttedInt = 0;
+		woodCuttedText.text = woodCuttedInt.ToString ();
 	}
 
 	public void StartGame(){
@@ -264,5 +265,11 @@ public class GameControllerBehaviour : MonoBehaviour {
 		if(creditsScreen.activeSelf){
 			GooglePlayController.instance.UnlockAchievement("CgkIscyVsr8eEAIQAw");
 		}
+	}
+
+	public void GoToMainMenu(){
+		ResetGameplay();
+		state = states.none;
+		startMenu.SetActive(true);
 	}
 }
