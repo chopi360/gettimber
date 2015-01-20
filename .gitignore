@@ -8,3 +8,5 @@ woodcutter/Library/
 woodcutter/ProjectSettings
 
 *.csproj
+
+woodcutter/Assets/Editor/projsettings.txt

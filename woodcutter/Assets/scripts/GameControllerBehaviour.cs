@@ -104,13 +104,18 @@ public class GameControllerBehaviour : MonoBehaviour {
 
 			bool isDead = GetDeadState (touched, dir);
 			if (!isDead) {
-					player.GetComponent<AudioSource>().Play();
-					woodCuttedInt++;
-					woodCuttedText.text = woodCuttedInt.ToString ();
-					MoveWood (dir);
-					MoveAllDown ();
-					AnimatePlayer();
-					timeToDeath = timePerCut + timeToDeath > 15.0f? 15.0f : timePerCut + timeToDeath;
+				player.GetComponent<AudioSource>().Play();
+				woodCuttedInt++;
+				ProcessAchievements ();
+				woodCuttedText.text = woodCuttedInt.ToString ();
+				MoveWood (dir);
+				MoveAllDown ();
+				AnimatePlayer();
+				timeToDeath = timePerCut + timeToDeath > 15.0f? 15.0f : timePerCut + timeToDeath;
+
+
+
+		
 			} else {
 					endMenu.SetActive (true);
 					playing = false;
@@ -119,6 +124,31 @@ public class GameControllerBehaviour : MonoBehaviour {
 			}
 		}
 	}
+
+	void ProcessAchievements ()	{
+		string unlockedAchievement = "";
+		switch (woodCuttedInt) {
+		case 1:
+			unlockedAchievement = "CgkIscyVsr8eEAIQAg";
+			break;
+		case 10:
+			unlockedAchievement = "CgkIscyVsr8eEAIQBA";
+			break;
+		case 50:
+			unlockedAchievement = "CgkIscyVsr8eEAIQBQ";
+			break;
+		case 100:
+			unlockedAchievement = "CgkIscyVsr8eEAIQBg";
+			break;
+		case 500:
+			unlockedAchievement = "CgkIscyVsr8eEAIQBw";
+			break;
+		}
+		if (!string.IsNullOrEmpty (unlockedAchievement)) {
+			GooglePlayController.instance.UnlockAchievement (unlockedAchievement);
+		}
+	}
+
 	//Returns true if the click will kill the player.
 	bool GetDeadState (string touched, Vector3 dir)	{
 		bool toRet = false;
@@ -179,5 +209,8 @@ public class GameControllerBehaviour : MonoBehaviour {
 
 	public void ShowHideCredits(){
 		creditsScreen.SetActive(!creditsScreen.activeSelf);
+		if(creditsScreen.activeSelf){
+			GooglePlayController.instance.UnlockAchievement("CgkIscyVsr8eEAIQAw");
+		}
 	}
 }
