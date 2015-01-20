@@ -149,6 +149,7 @@
      <Compile Include="Assets\scripts\GameControllerBehaviour.cs" />
      <Compile Include="Assets\scripts\GooglePlayController.cs" />
      <Compile Include="Assets\scripts\InputBehaviour.cs" />
+     <Compile Include="Assets\scripts\StartGameController.cs" />
      <Compile Include="Assets\scripts\Trunk.cs" />
      <Compile Include="Assets\scripts\TrunkLeft.cs" />
      <Compile Include="Assets\scripts\TrunkRight.cs" />
