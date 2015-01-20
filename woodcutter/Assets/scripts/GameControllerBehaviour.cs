@@ -232,14 +232,14 @@ public class GameControllerBehaviour : MonoBehaviour {
 
 	void AnimatePlayer (){
 		timeAnimation += Time.deltaTime;
-		if( timeAnimation > 0.07f){
+		if( timeAnimation > 0.12f){
 			playerSprite.sprite = playerSprites [1];
 		}
-		if( timeAnimation > 0.14f){
+		if( timeAnimation > 0.28f){
 			playerSprite.sprite = playerSprites [2];
 		}
 
-		if(timeAnimation > 0.28f){	
+		if(timeAnimation > 0.50f){	
 			playerSprite.sprite = playerSprites [0];
 			state = states.idle;
 			timeAnimation = 0.0f;
@@ -247,7 +247,16 @@ public class GameControllerBehaviour : MonoBehaviour {
 	}
 
 	void AnimationIdle (){
-		
+		timeAnimation += Time.deltaTime;
+		if( timeAnimation > 0.00f){
+			playerSprite.sprite = playerSprites [0];
+		}
+		if( timeAnimation > 0.05f){
+			playerSprite.sprite = playerSprites [4];
+		}
+		if(timeAnimation > 0.28f){	
+			timeAnimation = 0.0f;
+		}
 	}
 
 	public void ShowHideCredits(){
