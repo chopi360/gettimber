@@ -1,12 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/GooglePlayController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/EndGameBehaviour.cs">
     <Files>
-      <File FileName="Assets/scripts/GooglePlayController.cs" Line="48" Column="63" />
+      <File FileName="Assets/scripts/GooglePlayController.cs" Line="11" Column="47" />
+      <File FileName="Assets/scripts/GameControllerBehaviour.cs" Line="128" Column="29" />
+      <File FileName="Assets/scripts/EndGameBehaviour.cs" Line="19" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/Chopi/GitHub/gettimber/woodcutter/Assets/scripts/GooglePlayController.cs" line="55" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

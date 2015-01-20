@@ -10,3 +10,20 @@ woodcutter/ProjectSettings
 *.csproj
 
 woodcutter/Assets/Editor/projsettings.txt
+
+*.csproj
+
+*.csproj
+
+*.csproj
+
+woodcutter/Assembly-CSharp-vs.csproj
+*.csproj
+woodcutter/Library/assetDatabase3
+woodcutter/Library/guidmapper
+woodcutter/Library/guidmapper
+*.asset
+woodcutter/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
+woodcutter/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll.mdb
+woodcutter/Library/ScriptAssemblies/Assembly-CSharp.dll
+woodcutter/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
