@@ -1,15 +1,18 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/EndGameBehaviour.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/scripts/GooglePlayController.cs">
     <Files>
-      <File FileName="Assets/scripts/GooglePlayController.cs" Line="11" Column="47" />
-      <File FileName="Assets/scripts/GameControllerBehaviour.cs" Line="128" Column="29" />
+      <File FileName="Assets/scripts/GooglePlayController.cs" Line="11" Column="52" />
+      <File FileName="Assets/scripts/GameControllerBehaviour.cs" Line="63" Column="5" />
       <File FileName="Assets/scripts/EndGameBehaviour.cs" Line="19" Column="1" />
+      <File FileName="Assets/scripts/InputBehaviour.cs" Line="11" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/Chopi/GitHub/gettimber/woodcutter/Assets/scripts/GooglePlayController.cs" line="55" />
+      <Breakpoint file="/Users/Chopi/GitHub/gettimber/woodcutter/Assets/scripts/GameControllerBehaviour.cs" line="236" />
+      <Breakpoint file="/Users/Chopi/GitHub/gettimber/woodcutter/Assets/scripts/GameControllerBehaviour.cs" line="144" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

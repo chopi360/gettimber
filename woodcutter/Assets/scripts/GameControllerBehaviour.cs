@@ -60,6 +60,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 			break;
 
 			case states.dead:
+				playerSprite.sprite = playerSprites[3];
 			break;
 
 			case states.idle:

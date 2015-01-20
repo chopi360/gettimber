@@ -4,6 +4,7 @@ woodcutter/Temp/
 woodcutter/Assets/scripts/GooglePlayController.cs
 
 woodcutter/Library/
+woodcutter/Library/*
 
 woodcutter/ProjectSettings
 
@@ -27,3 +28,5 @@ woodcutter/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll
 woodcutter/Library/ScriptAssemblies/Assembly-CSharp-Editor.dll.mdb
 woodcutter/Library/ScriptAssemblies/Assembly-CSharp.dll
 woodcutter/Library/ScriptAssemblies/Assembly-CSharp.dll.mdb
+
+woodcutter/Library/metadata/ea/ea938244e60d24560b814151ef295deb
