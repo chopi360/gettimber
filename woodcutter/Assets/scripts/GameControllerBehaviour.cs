@@ -21,6 +21,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public GameObject endMenu;
 	public GameObject startMenu;
 	public GameObject player;
+	public GameObject creditsScreen;
 	public static GameControllerBehaviour instance;
 
 	private float timeToDeathConst;
@@ -174,5 +175,9 @@ public class GameControllerBehaviour : MonoBehaviour {
 		playerSprite.sprite = playerSprites [1];
 		playerSprite.sprite = playerSprites [2];
 		playerSprite.sprite = playerSprites [0];
+	}
+
+	public void ShowHideCredits(){
+		creditsScreen.SetActive(!creditsScreen.activeSelf);
 	}
 }
