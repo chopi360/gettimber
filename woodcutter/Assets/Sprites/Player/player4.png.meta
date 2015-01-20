@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1aaa65ff0bca172449e128c94bcb1c4c
+guid: b41dcd4d58c66374494e28407e6de119
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 2
@@ -40,7 +40,11 @@ TextureImporter:
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
-  buildTargetSettings: []
+  buildTargetSettings:
+  - buildTarget: Android
+    maxTextureSize: 512
+    textureFormat: -3
+    compressionQuality: 50
   spriteSheet:
     sprites: []
   spritePackingTag: 
