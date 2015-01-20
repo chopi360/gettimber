@@ -17,7 +17,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public Transform playerPosRight;
 
 	private int woodCuttedInt = 0;
-	private bool playing = false;
+
 	public GameObject endMenu;
 	public GameObject startMenu;
 	public GameObject player;
@@ -28,6 +28,18 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public float timePerCut = 0.05f;
 	public float timeToDeath = 15.0f;
 	private float timePlayed;
+	private float timeAnimation = 0.0f;
+
+	private enum states{
+		none,
+		pause,
+		idle,
+		animation_cut,
+		dead
+
+	}
+
+	private states state = states.none;
 
 	private List<GameObject> usedTreeModules = new List<GameObject> ();
 
@@ -42,16 +54,33 @@ public class GameControllerBehaviour : MonoBehaviour {
 	}
 
 	void Update(){
-		if (playing) {
+		switch(state){
+			case states.animation_cut:
+				AnimatePlayer();
+			break;
+
+			case states.dead:
+			break;
+
+			case states.idle:
+				AnimationIdle();
+			break;
+		}
+
+		if(state != states.none && state != states.dead && state != states.pause){
 			timeToDeath -= Time.deltaTime * 2.0f;
 			countDown.fillAmount = timeToDeath / timeToDeathConst;
 			if (timeToDeath <= 0) {
 				endMenu.SetActive (true);
-				playing = false;
 				endMenu.GetComponent<EndGameBehaviour> ().SetCuttedWood (woodCuttedInt);
+				state = states.dead;
 			}
 		}
+
+
 	}
+
+
 
 	void Init (){
 		instance = this;
@@ -74,7 +103,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 
 	public void ResetGameplay(){
 		endMenu.SetActive (false);
-		playing = true;
+		state = states.idle;
 		timeToDeath = timeToDeathConst;
 		for (int i = 0; i < usedTreeModules.Count; i++) {
 			treeModules.Add(usedTreeModules[i]);
@@ -91,7 +120,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 	}
 	
 	public void TouchResponse(Vector3 dir){
-		if (playing) {
+		if(state != states.none && state != states.dead && state != states.pause){
 			string touched = dir.x > 0 ? "l" : "r";
 
 			if(dir.x > 0){
@@ -104,21 +133,20 @@ public class GameControllerBehaviour : MonoBehaviour {
 
 			bool isDead = GetDeadState (touched, dir);
 			if (!isDead) {
+				timeAnimation = 0.0f;
+				state = states.animation_cut;
 				player.GetComponent<AudioSource>().Play();
 				woodCuttedInt++;
 				ProcessAchievements ();
 				woodCuttedText.text = woodCuttedInt.ToString ();
 				MoveWood (dir);
 				MoveAllDown ();
-				AnimatePlayer();
 				timeToDeath = timePerCut + timeToDeath > 15.0f? 15.0f : timePerCut + timeToDeath;
-
-
-
 		
 			} else {
+					state = states.dead;
 					endMenu.SetActive (true);
-					playing = false;
+					
 					endMenu.GetComponent<EndGameBehaviour> ().SetCuttedWood (woodCuttedInt);
 
 			}
@@ -202,9 +230,23 @@ public class GameControllerBehaviour : MonoBehaviour {
 	}
 
 	void AnimatePlayer (){
-		playerSprite.sprite = playerSprites [1];
-		playerSprite.sprite = playerSprites [2];
-		playerSprite.sprite = playerSprites [0];
+		timeAnimation += Time.deltaTime;
+		if( timeAnimation > 0.07f){
+			playerSprite.sprite = playerSprites [1];
+		}
+		if( timeAnimation > 0.14f){
+			playerSprite.sprite = playerSprites [2];
+		}
+
+		if(timeAnimation > 0.28f){	
+			playerSprite.sprite = playerSprites [0];
+			state = states.idle;
+			timeAnimation = 0.0f;
+		}
+	}
+
+	void AnimationIdle (){
+		
 	}
 
 	public void ShowHideCredits(){

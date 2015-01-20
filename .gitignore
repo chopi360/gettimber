@@ -10,3 +10,11 @@ woodcutter/ProjectSettings
 *.csproj
 
 woodcutter/Assets/Editor/projsettings.txt
+
+*.csproj
+
+*.csproj
+
+*.csproj
+
+woodcutter/Assembly-CSharp-vs.csproj
