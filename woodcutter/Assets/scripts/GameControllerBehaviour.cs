@@ -22,6 +22,9 @@ public class GameControllerBehaviour : MonoBehaviour {
 	public GameObject startMenu;
 	public GameObject player;
 	public GameObject creditsScreen;
+
+	public AudioSource deadSound;
+
 	public static GameControllerBehaviour instance;
 
 	private float timeToDeathConst;
@@ -60,7 +63,8 @@ public class GameControllerBehaviour : MonoBehaviour {
 			break;
 
 			case states.dead:
-				playerSprite.sprite = playerSprites[3];
+				OnDead();
+
 			break;
 
 			case states.idle:
@@ -88,6 +92,13 @@ public class GameControllerBehaviour : MonoBehaviour {
 		timeToDeathConst = timeToDeath;
 		CreateTree ();
 	}
+
+	void OnDead(){
+
+		playerSprite.sprite = playerSprites[3];
+		state = states.none;
+	}
+
 
 	void CreateTree (){
 		for (int i = 0; i < MAX_WOOD_SHOWN; i++) {
@@ -148,7 +159,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 			} else {
 					state = states.dead;
 					endMenu.SetActive (true);
-					
+					deadSound.Play();
 					endMenu.GetComponent<EndGameBehaviour> ().SetCuttedWood (woodCuttedInt);
 
 			}
