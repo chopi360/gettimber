@@ -115,6 +115,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 
 	public void ResetGameplay(){
 		endMenu.SetActive (false);
+		woodCuttedText.gameObject.SetActive(true);
 		state = states.idle;
 		timeToDeath = timeToDeathConst;
 		for (int i = 0; i < usedTreeModules.Count; i++) {
@@ -158,6 +159,7 @@ public class GameControllerBehaviour : MonoBehaviour {
 		
 			} else {
 					state = states.dead;
+					woodCuttedText.gameObject.SetActive(false);
 					endMenu.SetActive (true);
 					deadSound.Play();
 					endMenu.GetComponent<EndGameBehaviour> ().SetCuttedWood (woodCuttedInt);
